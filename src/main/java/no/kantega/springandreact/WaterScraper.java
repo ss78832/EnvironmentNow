@@ -11,7 +11,8 @@ public class WaterScraper {
 
 
         //Temporary zip code, should call Google api for location specifics
-        String zipCode = "78705";
+        String zipCode = "76103";
+        int count = 0;
 
         final String url =
                 "https://mytapwater.org/zip/"+zipCode+"/";
@@ -37,28 +38,29 @@ public class WaterScraper {
                     //print to look at contaminant URL
                     System.out.println(contaminantUrl);
 
-//                    try{
-//                        final Document contaminantDoc = Jsoup.connect(contaminantUrl).get();
-//
-//                        for(Element contaminantRow: document.select(
-//                                "table.mrl-exceeded.mrl-list"
-//                        )){
-//                            if(row.select("td:nth-of-type(1)").text().equals("")){
-//                                continue;
-//                            }else{
-//                                String contaminant = row.select("td:nth-of-type(1)").text();
-//                                String level = row.select("td:nth-of-type(2)").text();
-//
-//                                System.out.println(contaminant +", "+level);
-//                            }
-//                        }
-//
-//                        //String waterDataPerProvider = row.select("")
-//
-//                    }
-//                    catch (Exception e2){
-//                        e2.printStackTrace();
-//                    }
+                    //only getting first 10;
+                    count++;
+
+                    try{
+                        if(count < 10) {
+                            final Document contaminantDoc = Jsoup.connect(contaminantUrl).get();
+
+
+                            Element contaminantRow = contaminantDoc.select("table.mrl-exceeded.mrl-list").first();
+                            Element contaminant = contaminantDoc.select("div.contaminant").select("h4").first();
+
+                            //String contaminant = contaminantRow.select("td:nth-of-type(1)").text();
+                            String level = contaminantRow.select("td:nth-of-type(5)").text();
+
+                            System.out.println(contaminant.id().toString() + ", " + level);
+
+                            //String waterDataPerProvider = row.select("")
+                        }
+
+                    }
+                    catch (Exception e2){
+                        e2.printStackTrace();
+                    }
 
                 }
             }
