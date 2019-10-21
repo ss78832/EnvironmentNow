@@ -46,6 +46,7 @@ public class WaterScraper {
                             final Document contaminantDoc = Jsoup.connect(contaminantUrl).get();
 
 
+
                             Element contaminantRow = contaminantDoc.select("tr.exceeded").first();
                             Element contaminant = contaminantDoc.select("div.contaminant").select("h4").first();
 
@@ -54,6 +55,7 @@ public class WaterScraper {
                             String level = contaminantRow.select("td:nth-of-type(5)").text();
 
                             System.out.println("Contaminant: " + contaminant.id().toString() + ", Year: " + year + ", Test Result: " + level);
+
 
                             //String waterDataPerProvider = row.select("")
                         }
@@ -74,7 +76,7 @@ public class WaterScraper {
 
     }
 
-    public static void main(String[] args){
-        getWaterData();
+   // public static void main(String[] args){
+     //   getWaterData();
     }
-}
+//}
