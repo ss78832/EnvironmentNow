@@ -27,7 +27,9 @@ public class WaterScraper {
                 }else{
                     //Element cell = row.select("td:nth-of-type(1)").attr("href");
                     String waterProvider = row.select("td:nth-of-type(1)").text();
+
                     Elements link = row.select("td:nth-of-type(1) > a");
+
                     final String contaminantUrl = link.attr("href");
 
                     //print out waterProvider
